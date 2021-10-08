@@ -1,0 +1,46 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.App {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-grid {
+  display: grid;
+  grid-template-columns: repeat(16, 1fr);
+  grid-template-rows: repeat(16, 1fr);
+  color: whitesmoke;
+  width: 100vmin;
+  height: 100vmin;
+}
+
+@keyframes hover-effect {
+  from {
+    filter: hue-rotate(180deg);
+  }
+  to {
+    filter: hue-rotate(0deg);
+  }
+}
+
+.App-grid div:hover {
+  background-color: #9A6AFF;
+  animation: hover-effect 700ms ease-out;
+  animation-fill-mode: backwards;
+}
