@@ -4,6 +4,21 @@
   margin: 0;
 }
 
+input {
+  margin-bottom: 10px;
+  width: 100%;
+  color: #08060B;
+  border: 1px solid #DEDEDF;
+  padding: 2px;
+  border-radius: 6px;
+}
+
+input:focus {
+  outline-width: 1px;
+  outline-color: #61DAFB;
+  outline-offset: 0.5px;
+}
+
 .App {
   display: flex;
   text-align: center;
@@ -11,7 +26,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #08060B;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -21,13 +36,24 @@
   color: white;
 }
 
+.App-settings {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
 .App-grid {
   display: grid;
   grid-template-columns: repeat(16, 1fr);
   grid-template-rows: repeat(16, 1fr);
-  color: whitesmoke;
+  color: #DEDEDF;
   width: 100vmin;
   height: 100vmin;
+}
+
+.App-grid div {
+  transition: all .4s ease-in;
 }
 
 @keyframes hover-effect {
