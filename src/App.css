@@ -5,35 +5,46 @@
 }
 
 input {
-  margin-bottom: 10px;
-  width: 100%;
+  width: auto;
   color: #08060B;
   border: 1px solid #DEDEDF;
-  padding: 2px;
-  border-radius: 6px;
+  padding: 1px;
+  border-radius: 5px;
+  font-size: calc(8px + 1vmin);
+  font-weight: 600;
+}
+
+input[type=number] {
+  width: 4ch;
+  text-align: center;
 }
 
 input:focus {
-  outline-width: 1px;
-  outline-color: #61DAFB;
-  outline-offset: 0.5px;
+  outline: none;
+  border: 1px inset #005CC8;
+}
+
+button {
+  background-color: #005CC8;
+  border: 1px solid #005CC8;
+  border-radius: 8px;
+  width: 100%;
+  font-weight: 600;
+  font-size: calc(8px + 1vmin);
+}
+
+button:active {
+  transform: scale(1.1);
+  border-color: #0069CC;
+  box-shadow: 0 0 1rem #0069CC;
 }
 
 .App {
   display: flex;
   text-align: center;
   justify-content: center;
-}
-
-.App-header {
-  background-color: #08060B;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  gap: 2%;
+  flex-wrap: wrap;
 }
 
 .App-settings {
@@ -41,19 +52,21 @@ input:focus {
   flex-direction: column;
   flex-wrap: wrap;
   align-items: flex-start;
+  justify-content: center;
+  gap: 1%;
 }
 
-.App-grid {
+/* .App-grid {
   display: grid;
   grid-template-columns: repeat(16, 1fr);
   grid-template-rows: repeat(16, 1fr);
   color: #DEDEDF;
   width: 100vmin;
   height: 100vmin;
-}
+} */
 
 .App-grid div {
-  transition: all .4s ease-in;
+  transition: all .3s ease-in;
 }
 
 @keyframes hover-effect {

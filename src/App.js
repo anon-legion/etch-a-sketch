@@ -13,28 +13,51 @@ const hoverFunction = (e) => {
 function App() {
 
   const [gridSize, setGridSize] = useState(() => 16);
-  const [duration, setDuration] = useState(() => 3);
-  const [inputParam, setInputParam] = useState(() => ({
+  const [inputSize, setInputSize] = useState(() => ({
     newSize: gridSize,
-    newDuration: duration
   }));
+  const [gridStyle, setGridStyle] = useState(() => ({
+    display: 'grid',
+    gridTemplateColumns: `repeat(${gridSize}, 1fr)`,
+    gridTemplateRows: `repeat(${gridSize}, 1fr)`,
+    color: '#DEDEDF',
+    width: '100vmin',
+    height: '100vmin'
+  }))
 
   const handleOnChange = (e) => {
-    setInputParam(prevState => {
-      return {...prevState, [e.target.name]: e.target.value}
+    setInputSize(prevState => {
+      return {...prevState, [e.target.name]: Math.max(Number(e.target.min), Math.min(Number(e.target.value), Number(e.target.max)))}
     });
+  }
+
+  const clearOnClick = () => {
+    const pixels = document.querySelectorAll('.App-grid div');
+    pixels.forEach(pixel => pixel.style.background = '#08060B');
+  }
+  
+  const newOnClick = () => {
+    setGridSize(prevState => inputSize.newSize);
+    setGridStyle(prevState => {
+      return {[gridStyle.gridTemplateColumns]: `repeat(${inputSize.newSize})`, [gridStyle.gridTemplateRows]: `repeat(${inputSize.newSize})`};
+    })
   }
 
   return (
     <div className="App">
       <div className="App-settings">
         <label htmlFor='inputSize'>Grid size:</label>
-        <input type='number' id='inputSize' name='newSize' value={inputParam.newSize} onChange={handleOnChange} min={2} max={256}/>
-        <label htmlFor='inputDuration'>Trail duration:</label>
-        <input type='number' id='inputDuration' name='newDuration' value={inputParam.newDuration} onChange={handleOnChange} min={-1} max={9}/>
+        <div style={{display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'center'}}>
+          <h3> <input type='number' name='newSize' value={inputSize.newSize} min={2} max={128} onChange={handleOnChange}/> x {inputSize.newSize}</h3>
+        </div>
+        <input type='range' id='inputSize' name='newSize' value={inputSize.newSize} min={2} max={128} onChange={handleOnChange}/>
+        <div style={{display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'center', gap: '5px'}}>
+          <button onClick={clearOnClick}>Clear</button>
+          <button onClick={newOnClick}>New</button>
+        </div>
       </div>
-      <div className="App-grid">
-        <Grids size={gridSize} hoverEffect={hoverFunction} trailDuration={duration * 1000}/>
+      <div className="App-grid" style={gridStyle}>
+        <Grids size={gridSize} hoverEffect={hoverFunction} />
       </div> 
     </div>
   );
