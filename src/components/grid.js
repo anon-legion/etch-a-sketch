@@ -1,4 +1,6 @@
 import React from 'react';
+import {isMobile} from 'react-device-detect';
+
 
 const Grids = ({ size, hoverEffect }) => {
     let gridIndex = [];
@@ -17,7 +19,7 @@ const Grids = ({ size, hoverEffect }) => {
     return (
         <React.Fragment>
             {gridIndex.map(index => {
-                return <div key={index} onMouseEnter={hoverEffect}></div>
+                return <div key={index} onMouseEnter={isMobile ? () => (false) : hoverEffect} onTouchStart={hoverEffect}></div>
             })}
         </React.Fragment>
     );
