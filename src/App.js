@@ -5,13 +5,14 @@ import randomRGB from './scripts/randomColor';
 
 const hoverFunction = (e) => {
   const [r, g, b] = randomRGB();
+  e.target.style.animation = 'hover-effect 2000ms ease-in';
   e.target.style.background = `rgb(${r},${g},${b})`;
-  e.target.style.animation = 'hover-effect 700ms ease-in';
 }
 
 
 function App() {
 
+  const [showGrid, setShowGrid] = useState(() => false);
   const [gridSize, setGridSize] = useState(() => 16);
   const [inputSize, setInputSize] = useState(() => ({
     newSize: gridSize,
@@ -37,23 +38,36 @@ function App() {
   }
   
   const newOnClick = () => {
-    setGridSize(prevState => inputSize.newSize);
+    const size = inputSize.newSize;
     setGridStyle(prevState => {
-      return {[gridStyle.gridTemplateColumns]: `repeat(${inputSize.newSize})`, [gridStyle.gridTemplateRows]: `repeat(${inputSize.newSize})`};
+      return {...prevState, gridTemplateColumns: `repeat(${size}, 1fr)`, gridTemplateRows: `repeat(${size}, 1fr)`};
     })
+    setGridSize(prevState => size);
   }
 
+  const gridViewOnChange = () => {
+    setShowGrid(prevState => !prevState);
+  }
+
+  
   return (
     <div className="App">
       <div className="App-settings">
-        <label htmlFor='inputSize'>Grid size:</label>
+        <label htmlFor='inputSize'>Grid size</label>
         <div style={{display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'center'}}>
-          <h3> <input type='number' name='newSize' value={inputSize.newSize} min={2} max={128} onChange={handleOnChange}/> x {inputSize.newSize}</h3>
+          <h3> <input type='number' id='inputSize' name='newSize' value={inputSize.newSize} min={2} max={128} onChange={handleOnChange}/> x {inputSize.newSize}</h3>
         </div>
         <input type='range' id='inputSize' name='newSize' value={inputSize.newSize} min={2} max={128} onChange={handleOnChange}/>
         <div style={{display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'center', gap: '5px'}}>
           <button onClick={clearOnClick}>Clear</button>
           <button onClick={newOnClick}>New</button>
+        </div>
+        <div style={{display: 'flex', flexDirection: 'column', gap: '4px', marginTop: '2%'}}>
+          <label htmlFor='switchGridView'>Grid view</label>
+          <label className="switch">
+            <input type="checkbox" id='switchGridView' onChange={gridViewOnChange} name='showGrid' value={showGrid}/>
+            <span className="slider round"></span>
+          </label>
         </div>
       </div>
       <div className="App-grid" style={gridStyle}>
