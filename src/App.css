@@ -128,3 +128,16 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+
+.border-bottom-right {
+  border-bottom: 1px solid #DEDEDF;
+  border-right: 1px solid #DEDEDF;
+}
+
+.border-bottom {
+  border-bottom: 1px solid #DEDEDF;
+}
+
+.border-right {
+  border-right: 1px solid #DEDEDF;
+}

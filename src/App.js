@@ -1,13 +1,16 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import './App.css';
+import borderResources from './scripts/addBorder';
 import Grids from './components/grid.js';
 import randomRGB from './scripts/randomColor';
+
+const { addBorders, removeBorders } = borderResources;
 
 const hoverFunction = (e) => {
   const [r, g, b] = randomRGB();
   e.target.style.animation = 'hover-effect 2000ms ease-in';
   e.target.style.background = `rgb(${r},${g},${b})`;
-}
+};
 
 
 function App() {
@@ -25,6 +28,13 @@ function App() {
     width: '100vmin',
     height: '100vmin'
   }))
+
+  useEffect(() => {
+    const grid = document.querySelector('.App-grid');
+    const pixels = document.querySelectorAll('.App-grid div');
+    showGrid ? addBorders(pixels, gridSize) : removeBorders(pixels);
+    showGrid ? grid.style.border = '1px solid #DEDEDF' : grid.style.border = 'none';
+  }, [showGrid, gridSize])
 
   const handleOnChange = (e) => {
     setInputSize(prevState => {
@@ -65,7 +75,7 @@ function App() {
         <div style={{display: 'flex', flexDirection: 'column', gap: '4px', marginTop: '2%'}}>
           <label htmlFor='switchGridView'>Grid view</label>
           <label className="switch">
-            <input type="checkbox" id='switchGridView' onChange={gridViewOnChange} name='showGrid' value={showGrid}/>
+            <input type="checkbox" id='switchGridView' onChange={gridViewOnChange} name='showGrid' checked={showGrid}/>
             <span className="slider round"></span>
           </label>
         </div>
