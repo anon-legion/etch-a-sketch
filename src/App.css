@@ -45,7 +45,7 @@ button:active {
   text-align: center;
   justify-content: center;
   gap: 2%;
-  flex-wrap: wrap;
+  flex-wrap: wrap-reverse;
 }
 
 .App-settings {

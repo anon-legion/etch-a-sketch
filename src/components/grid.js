@@ -15,11 +15,10 @@ const Grids = ({ size, hoverEffect }) => {
     //     }, trailDuration)
     // }
 
-
     return (
         <React.Fragment>
             {gridIndex.map(index => {
-                return <div key={index} onMouseEnter={isMobile ? () => (false) : hoverEffect} onTouchStart={isMobile ? hoverEffect : () => (false)}></div>
+                return <div key={index} onMouseEnter={isMobile ? () => false : hoverEffect} onClick={isMobile ? hoverEffect : () => false}></div>
             })}
         </React.Fragment>
     );
